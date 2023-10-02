@@ -16,7 +16,7 @@ body {
 }
 
 .wrapper {
-	width: 400px;
+	width: 300px;
 	padding: 10px;
 	border: 2px solid rgb(255, 213, 249);
 	border-radius: 20px;
@@ -33,7 +33,7 @@ th {
 }
 
 td {
-	width: 70%;
+	width: 60%;
 }
 
 input[type="number"], select, button {
