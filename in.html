@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Strand Encoder</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="in.css">
+		<script src="in.js"></script>
+	</head>
+	<body>
+		<form name="stamp" onsubmit="return strand()">
+			<div class="wrapper">
+				<h1>Strand Encoder</h1>
+				<table>
+
+				<tr>
+					<th><label for="tool">Tool</label></th>
+					<td>
+					<select name="tool" id="tool" required>
+						<option value="rect">rect</option>
+						<option value="line">line</option>
+						<option value="oval">oval</option>
+					</select>
+					</td>
+				</tr>
+
+				<tr>
+					<th><label for="colour">Colour</label></th>
+					<td>
+					<select name="colour" id="colour" required>
+						<option value="red">red</option>
+						<option value="blue">blue</option>
+						<option value="green">green</option>
+						<option value="yellow">yellow</option>
+						<option value="purple">purple</option>
+						<option value="pink">pink</option>
+						<option value="white">white</option>
+						<option value="black">black</option>
+					</select>
+					</td>
+				</tr>
+
+				<tr>
+					<th><label for="valX">X Coord</label></th>
+					<td><input min=0 max=64 type="number" id="valX" name="valX" required></td>
+				</tr>
+
+				<tr>
+					<th><label for="valY">Y Coord</label></th>
+					<td><input min=0 max=64 type="number" id="valY" name="valY" required></td>
+				</tr>
+
+				<tr>
+					<th><label for="val1">Value 1</label></th>
+					<td><input min=0 max=64 type="number" id="val1" name="val1" required></td>
+				</tr>
+
+				<tr>
+					<th><label for="val2">Value 2</label></th>
+					<td><input min=0 max=64 type="number" id="val2" name="val2" required></td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<br>
+						<button type="submit">Submit</button>
+					</td>
+				</tr>
+
+				</table>
+				<footer
+				style="font-size: 0.8rem; text-align: center;">Developed by <a style="font-size: inherit" href="https://github.com/rackodo" target="_blank">rackodo</a> (2023).</footer>
+			</div>
+		</form>
+	</body>
+</html>
