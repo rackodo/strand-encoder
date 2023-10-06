@@ -1,5 +1,10 @@
-let tool, colour, valueX, valueY, value1, value2;
-let str = "";
+let tool, colour;
+
+let stampW = 64;
+let stampH = 64;
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext('2d');
 
 const coordMap = {
     0: 'A',
@@ -67,7 +72,7 @@ const coordMap = {
     62: '+',
     63: '/',
     64: '$'
-};
+}
 
 const commandMap = {
     'rect': 0, // Rectangle
@@ -86,24 +91,112 @@ const colourMap = {
 	'black': 7
 }
 
-function strand() {
-	tool = document.forms["stamp"]["tool"].value;
-	colour = document.forms["stamp"]["colour"].value;
+function strand(shouldReport) {
+	ctx.clearRect(0,0,64,64);
+	init()
 
-	valueX = document.forms["stamp"]["valX"].value;
-	valueY = document.forms["stamp"]["valY"].value;
-	value1 = document.forms["stamp"]["val1"].value;
-	value2 = document.forms["stamp"]["val2"].value;
+	tool = pullData().tool;
+	colour = pullData().colour;
+	
+	let valX = pullData().valueX;
+	let valY = pullData().valueY;
+	let val1 = pullData().valueA;
+	let val2 = pullData().valueB;
 
-	str += commandMap[tool];
-	str += colourMap[colour];
+	switch (tool) {
+		case "line": drawLine(valX, valY, val1, val2, colour); break;
+		case "rect": drawRect(valX, valY, val1, val2, colour); break;
+		case "oval": drawOval(valX, valY, val1, val2, colour)
+	}
+	
+	if (shouldReport) {
+		let str = "";
 
-	str += coordMap[valueX];
-	str += coordMap[valueY];
-	str += coordMap[value1];
-	str += coordMap[value2];
+		str += commandMap[tool];
+		str += colourMap[colour];
 
-	alert(str)
-	str = "";
+		str += coordMap[valX];
+		str += coordMap[valY];
+		str += coordMap[val1];
+		str += coordMap[val2];
+
+		alert(str)
+		str = "";
+	}
+
 	return false;
+}
+
+function pullData() {
+	return {
+		tool: document.forms["stamp"]["tool"].value, 
+		colour: document.forms["stamp"]["colour"].value,
+		valueX: document.forms["stamp"]["valX"].value,
+		valueY: document.forms["stamp"]["valY"].value,
+		valueA: document.forms["stamp"]["val1"].value,
+		valueB: document.forms["stamp"]["val2"].value
+	};
+}
+
+function onload() {
+	init()
+}
+
+function init() {
+	canvas.width = 64;
+	canvas.height = 64;
+
+	ctx.imageSmoothingEnabled = false;
+	
+	drawBounds()
+}
+
+function drawBounds() {
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = `rgba(255, 255, 255, 0.5`;
+
+	ctx.beginPath();
+	ctx.moveTo(30, 32.5);
+	ctx.lineTo(35, 32.5);
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.moveTo(32.5, 30);
+	ctx.lineTo(32.5, 35);
+	ctx.stroke();
+
+	ctx.strokeRect(0, 0, 64, 64);
+}
+
+function drawLine(x, y, a, b, colour) {
+	ctx.strokeStyle = colour;
+	ctx.lineWidth = .1;
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.lineTo(a, b);
+	ctx.stroke();
+	ctx.moveTo(x, y);
+	ctx.lineTo(a, b);
+	ctx.stroke();
+	ctx.moveTo(x, y);
+	ctx.lineTo(a, b);
+	ctx.stroke();
+}
+
+function drawRect(x, y, a, b, colour) {
+	ctx.fillStyle = colour;
+	ctx.lineWidth = 0;
+	ctx.fillRect(x, y, a, b);
+}
+
+function drawOval(x, y, a, b, colour) {
+	ctx.fillStyle = colour;
+	ctx.lineWidth = .1;
+	ctx.beginPath()
+	ctx.ellipse(x, y, a, b, 2 * Math.PI, 0, 2 * Math.PI);
+	ctx.fill();
+	ctx.ellipse(x, y, a, b, 2 * Math.PI, 0, 2 * Math.PI);
+	ctx.fill();
+	ctx.ellipse(x, y, a, b, 2 * Math.PI, 0, 2 * Math.PI);
+	ctx.fill();
 }

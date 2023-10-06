@@ -23,11 +23,10 @@
 
 		<!-- Meta Tags Generated with https://metatags.io -->
 		<link rel="stylesheet" href="in.css">
-		<script src="in.js"></script>
 	</head>
-	<body>
-		<form name="stamp" onsubmit="return strand()">
-			<div class="wrapper">
+	<body onload="onload()">
+		<div class="wrapper">
+			<form name="stamp" onsubmit="return strand(true)">
 				<h1>Strand Encoder</h1>
 				<table>
 
@@ -80,15 +79,22 @@
 
 				<tr>
 					<td colspan="2">
-						<br>
-						<button type="submit">Submit</button>
+						<div class="buttongroup">
+							<button type="button" onclick="strand(false)">Preview</button>
+							<button type="submit">Submit</button>
+						</div>
 					</td>
+					<br>
 				</tr>
 
 				</table>
-				<footer
-				style="font-size: 0.8rem; text-align: center;">Developed by <a style="font-size: inherit" href="https://github.com/rackodo" target="_blank">rackodo</a> (2023).</footer>
-			</div>
-		</form>
+			</form>
+			<br/>
+			<canvas id="canvas"></canvas>
+			<br/>
+			<footer
+			style="font-size: 0.8rem; text-align: center;">Developed by <a style="font-size: inherit" href="https://github.com/rackodo" target="_blank">rackodo</a> (2023).</footer>
+		</div>
+		<script src="in.js"></script>
 	</body>
 </html>

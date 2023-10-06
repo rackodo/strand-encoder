@@ -55,3 +55,32 @@ button {
 h1 {
 	text-align: center;
 }
+
+#canvas {
+	/* background-color: red; */
+	display: flex;
+	flex-wrap: wrap;
+	aspect-ratio: 1/1;
+	width: 100%;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+.buttongroup {
+	padding: 0;
+	margin: 0;
+	gap: 10px;
+	display: flex;
+}
+
+button {
+	display: block;
+	cursor: pointer;
+	flex: 50%;
+}
+
+button:hover {
+	font-weight: bold;
+	background-color: rgb(255, 213, 249);
+	color:rgb(50, 43, 58);
+}
